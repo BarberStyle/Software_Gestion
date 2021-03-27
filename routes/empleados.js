@@ -4,10 +4,12 @@ const router = express.Router();
 const empleadoController = require('../controllers/empleadoController');
 const { check } = require('express-validator');
 const auth = require('../middleware/auth');
+const authController =   require ('../controllers/authController');
 
 //Api/empleados  --crea un empleado
 router.post('/',
   auth,
+  authController.isAdmin,
   empleadoController.crearEmpleado
 );
 
@@ -27,6 +29,7 @@ router.delete('/:id',
 
 //modificar el empleado
 router.put('/:id',
+auth,
 empleadoController.actualizarEmpleado
 );
 

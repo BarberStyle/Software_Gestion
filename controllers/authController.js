@@ -1,4 +1,6 @@
 const Usuario = require('../models/Usuario');
+const Empleado = require('../models/Empleado')
+const Roles = require('../models/Role');
 const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
@@ -13,12 +15,12 @@ exports.autenticarUsuario = async (req, res) => {
         return res.status(400).json({ errores: errores.array() });
     }
 
-    const {documento,contraseña } = req.body;
+    const { documento, contraseña } = req.body;
 
     try {
 
         //revisar que el usuario si exista
-        let usuario = await Usuario.findOne({documento});
+        let usuario = await Usuario.findOne({ documento });
 
         if (!usuario) {
             return res.status(400).json({ msg: 'El usuario no existe' });
@@ -52,15 +54,52 @@ exports.autenticarUsuario = async (req, res) => {
         console.log(error);
         res.status(400).send('Hubo un error');
     }
+
 }
 
 //devuelve el usuario autenticado
 exports.usuarioAutenticado = async (req, res) => {
     try {
         const usuario = await Usuario.findById(req.usuario.id).select('-contraseña');
-        res.json({usuario});
+        res.json({ usuario });
     } catch (error) {
         console.log(console.error());
         res.status(500).json({ msg: 'hubo un error' })
     }
 }
+
+exports.isAdmin = async (req, res, next) => {
+    try {
+        let usuario = await Usuario.findById(req.usuario.id);
+
+        const roles = await Roles.findById((usuario.rol));
+
+        if (roles.nombre === "Admin") {
+            next();
+            return;
+        }
+
+        return res.status(403).json({ message: "Require Permisos de Admin!" });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({ message: error });
+    }
+};
+
+
+exports.isEmpleado = async (req, res, next) => {
+    try {
+        let empleado = await Empleado.findById(req._id);
+        const roles = await Roles.findById((usuario.rol));
+
+        if (roles.nombre === "Empleado") {
+            next();
+            return;
+        }
+
+        return res.status(403).json({ message: "Require Permisos de Empleado!" });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({ message: error });
+    }
+};

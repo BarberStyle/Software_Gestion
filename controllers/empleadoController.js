@@ -31,6 +31,8 @@ exports.crearEmpleado = async (req, res) => {
         const salt = await bcryptjs.genSalt(10);
         empleado.contrasena = await bcryptjs.hash(contrasena, salt);
 
+
+        //guarda en bd
         await empleado.save();
 
         res.json(empleado);

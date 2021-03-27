@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario');
+const Role = require('../models/Role');
 const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
@@ -17,7 +18,7 @@ exports.crearUsuario = async (req, res) => {
 
     try {
         //Revisar usuario regitrado unico
-        let usuario = await Usuario.findOne({documento});
+        let usuario = await Usuario.findOne({ documento });
 
         if (usuario) {
             return res.status(400).json({ msg: 'El usuario ya existe' });
@@ -26,14 +27,23 @@ exports.crearUsuario = async (req, res) => {
         //crea el nuevo usuario
         usuario = new Usuario(req.body);
 
+
+        // checking for roles
+        if (!req.body.rol) {
+
+            const role = await Role.findOne({ nombre: "Cliente" });
+            usuario.rol = [role._id];
+        }
+
+
         //hashear el password
         const salt = await bcryptjs.genSalt(10);
         usuario.contraseña = await bcryptjs.hash(contraseña, salt);
 
-        //guarda el nuevo usuario
+        //guarda el nuevo usuario bd 
         await usuario.save();
 
-        //crear y guardar jwt
+        //crear y guardar json web token
         const payload = {
             usuario: {
                 id: usuario.id
@@ -54,3 +64,5 @@ exports.crearUsuario = async (req, res) => {
         res.status(400).send(error);
     }
 }
+
+

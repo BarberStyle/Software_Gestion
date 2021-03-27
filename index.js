@@ -26,7 +26,17 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/servicios', require('./routes/servicios'));
 //app.use('/api/productos', require('./routes/productos'));
 app.use('/api/empleados', require('./routes/empleados'));
+app.use('/api/dias', require('./routes/dias'));
+app.use('/api/experiencias', require('./routes/experiencias'));
+app.use('/api/estudios', require('./routes/estudios'));
+app.use('/api/roles' , require('./routes/roles'));
+app.use('/api/preguntas' , require('./routes/preguntas'));
+app.use('/api/respuestas' , require('./routes/respuestas'));
 
 
-const port = process.env.PORT || 5000
+
+
+
+
+const port = process.env.PORT || 8001
 app.listen(port, '0.0.0.0', () => console.log(`Server running on port: ${port}`))

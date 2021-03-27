@@ -15,18 +15,19 @@ router.post('/',
 
 //consultar servicios
 router.get('/',
-  auth,
   servicioController.obtenerServicios
 
 );
 
 //modificar el servicio
 router.put('/:id',
+  auth,
   servicioController.actualizarServicio
 );
 
 //eliminar el servicio
 router.delete('/:id',
+  auth,
   servicioController.eliminarServicio
 
 )

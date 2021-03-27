@@ -40,9 +40,9 @@ const UsuariosSchema = mongoose.Schema({
         require: true,
         trim: true
     },
-    idPregunta: {
-        type: Number,
-        trim: true
+    rol: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role'
     },
     registro: {
         type: Date,
@@ -51,4 +51,3 @@ const UsuariosSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('Usuario', UsuariosSchema);
-// servicios --> guarda los documents en la coleccion
