@@ -4,37 +4,13 @@ const mongoose = require('mongoose');
 
 
 const ProductosSchema = mongoose.Schema({
-	nombre: {
+    nombre: {
         type: String,
         require: true,
-        unique:true,
+        unique: true,
         trim: true
     },
-    disponibles: {
-        type: Number,
-        require: true,
-        trim: true
-    },
-    medida: {
-        type: String,
-        require: true,
-        trim: true
-    },
-    cantidadMed: {
-        type: Number,
-        require: true,
-        trim: true
-    },
-    tamaño: {
-        type: Number,
-        trim: true
-    },
-    tipo: {
-        type: String,
-        require: true,
-        trim: true
-    },
-    marca: {
+    descripcion: {
         type: String,
         require: true,
         trim: true
@@ -44,8 +20,17 @@ const ProductosSchema = mongoose.Schema({
         require: true,
         trim: true
     },
-    idProveedor: {
+    foto: {
+        type: String,
+        trim: true
+    },
+    disponibles: {
         type: Number,
+        require: true,
+        trim: true
+    },
+    estado: {
+        type: String,
         trim: true
     },
     registro: {
