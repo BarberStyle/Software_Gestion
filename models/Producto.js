@@ -12,7 +12,6 @@ const ProductosSchema = mongoose.Schema({
     },
     descripcion: {
         type: String,
-        require: true,
         trim: true
     },
     precio: {

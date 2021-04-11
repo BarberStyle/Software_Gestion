@@ -30,6 +30,8 @@ app.use('/api/dias', require('./routes/dias'));
 app.use('/api/experiencias', require('./routes/experiencias'));
 app.use('/api/estudios', require('./routes/estudios'));
 app.use('/api/roles' , require('./routes/roles'));
+app.use('/api/contrasena' , require('./routes/contrasena'));
+
 
 
 
