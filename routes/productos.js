@@ -15,7 +15,6 @@ router.post('/',
 
 //obtiene productos
 router.get('/',
-  auth,
   productoController.obtenerProductos
 
 );
