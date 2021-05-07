@@ -30,13 +30,11 @@ app.use('/api/dias', require('./routes/dias'));
 app.use('/api/experiencias', require('./routes/experiencias'));
 app.use('/api/estudios', require('./routes/estudios'));
 app.use('/api/roles' , require('./routes/roles'));
+app.use('/api/validacion' , require('./routes/contrasena'));
+app.use('/api/respuestas' , require('./routes/respuestas'));
 app.use('/api/contrasena' , require('./routes/contrasena'));
 
 
 
-
-
-
-
-const port = process.env.PORT || 8001
+const port = process.env.PORT || 7009
 app.listen(port, '0.0.0.0', () => console.log(`Server running on port: ${port}`))

@@ -2,7 +2,6 @@ const Usuario = require('../models/Usuario');
 const Role = require('../models/Role');
 const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
 
 exports.crearUsuario = async (req, res) => {
 
@@ -21,7 +20,7 @@ exports.crearUsuario = async (req, res) => {
         let usuario = await Usuario.findOne({ documento });
 
         if (usuario) {
-            return res.status(400).json({ msg: 'El usuario ya existe' });
+            return res.status(400).json({ msg: 'El USUARIO YA EXISTE' });
         }
 
         //crea el nuevo usuario
@@ -43,26 +42,26 @@ exports.crearUsuario = async (req, res) => {
         //guarda el nuevo usuario bd 
         await usuario.save();
 
-        //crear y guardar json web token
-        const payload = {
-            usuario: {
-                id: usuario.id
-            }
-        };
+        res.json('CLIENTE REGISTRADO CON EXITO');
 
-        //firmar el jwt (json web token)
-        jwt.sign(payload, process.env.SECRETA, {
-            expiresIn: 3600
-        }, (error, token) => {
-            if (error) throw error;
-
-            //mensaje de confirmacion
-            res.json({ token });
-        });
     } catch (error) {
         console.log(error);
         res.status(400).send(error);
     }
 }
+
+
+//consulta todos los empleados registados en la bd
+exports.obtenerClientes = async (req, res) => {
+    try {
+        const usuarios = await Usuario.find({});
+        res.json({ usuarios });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+
+}
+
 
 

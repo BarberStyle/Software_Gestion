@@ -23,13 +23,14 @@ exports.autenticarUsuario = async (req, res) => {
         let usuario = await Usuario.findOne({ documento });
 
         if (!usuario) {
-            return res.status(400).json({ msg: 'El usuario no existe' });
+            
+            return res.status(400).json({ msg: 'EL USUARIO NO EXISTE' });
         }
 
         //revisar que el password coincida
         const passCorrecto = await bcryptjs.compare(contraseña, usuario.contraseña);
         if (!passCorrecto) {
-            return res.status(400).json({ msg: 'Contraseña incorrecta' });
+            return res.status(400).json({ msg: 'CONTRASEÑA INCORRECTA' });
         }
 
         //si todo es correcto
