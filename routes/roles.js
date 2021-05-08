@@ -4,7 +4,7 @@ const rolesController = require('../controllers/rolesController');
 
 
 
-//Api/servicios  --crea servicio
+//Api/rol
 router.post('/',
     rolesController.crearRol
 );

@@ -25,7 +25,7 @@ exports.crearServicio = async (req, res) => {
 
         await servicio.save();
 
-        res.json(servicio);
+        res.json('SERVICIO CREADO CON EXITO');
     } catch (error) {
         console.log(error);
         res.status(400).send('Hubo un error');

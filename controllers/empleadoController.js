@@ -21,7 +21,7 @@ exports.crearEmpleado = async (req, res) => {
         let empleado = await Empleado.findOne({ documento });
 
         if (empleado) {
-            return res.status(400).json({ msg: 'El Empleado ya existe' });
+            return res.status(400).json({ msg: 'EL EMPLEADO YA EXISTE' });
         }
 
         //crea el nuevo Empleado
@@ -35,7 +35,7 @@ exports.crearEmpleado = async (req, res) => {
         //guarda en bd
         await empleado.save();
 
-        res.json(empleado);
+        res.json('EMPLEADO CREADO CON EXITO');
     } catch (error) {
         console.log(error);
         res.status(400).send('Hubo un error');
