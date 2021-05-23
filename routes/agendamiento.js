@@ -5,14 +5,13 @@ const { check } = require('express-validator');
 const agendamientoController = require('../controllers/agendamientoController');
 
 
-router.post('/',
-  [
-    check('documento', 'El documento es obligatorio').not().isEmpty(),
-
-  ],
+router.get('/:id',
   agendamientoController.validarUsuario
 );
 
+router.post('/',
+  agendamientoController.crearCita
+);
 
 
 module.exports = router;

@@ -32,16 +32,12 @@ exports.validarUsuario = async (req, res) => {
             return res.status(400).json({ msg: 'LA PREGUNTA Y/O RESPUESTA SON INCORRECTAS'});
         }
 
-
         //confirmacion
         res.json(usuario);
-
-
     } catch (error) {
         console.log(error);
         res.status(400).send('HUBO UN ERROR');
     }
-
 }
 
 // Actualizar producto

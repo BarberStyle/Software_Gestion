@@ -26,15 +26,14 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/servicios', require('./routes/servicios'));
 app.use('/api/productos', require('./routes/productos'));
 app.use('/api/empleados', require('./routes/empleados'));
-app.use('/api/estudios', require('./routes/estudios'));
 app.use('/api/roles' , require('./routes/roles'));
 app.use('/api/validacion' , require('./routes/contrasena'));
 app.use('/api/respuestas' , require('./routes/respuestas'));
 app.use('/api/contrasena' , require('./routes/contrasena'));
 app.use('/api/validacion-cliente' , require('./routes/agendamiento'));
 app.use('/api/tipos' , require('./routes/tipos'));
-
-
+app.use('/api/agendar-cita' , require('./routes/agendamiento'));
+app.use('/api/consultar-agendamiento', require('./routes/consultasAgendamiento'))
 
 
 const port = process.env.PORT || 7009
