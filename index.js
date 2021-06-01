@@ -31,10 +31,11 @@ app.use('/api/validacion' , require('./routes/contrasena'));
 app.use('/api/respuestas' , require('./routes/respuestas'));
 app.use('/api/contrasena' , require('./routes/contrasena'));
 app.use('/api/validacion-cliente' , require('./routes/agendamiento'));
-app.use('/api/tipos' , require('./routes/tipos'));
 app.use('/api/agendar-cita' , require('./routes/agendamiento'));
 app.use('/api/consultar-agendamiento', require('./routes/consultasAgendamiento'))
+app.use('/api/estados', require('./routes/estados'))
+app.use('/api/citas', require('./routes/citas'))
 
 
-const port = process.env.PORT || 7009
+const port = process.env.PORT || 7010
 app.listen(port, '0.0.0.0', () => console.log(`Server running on port: ${port}`))

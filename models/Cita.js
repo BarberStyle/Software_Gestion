@@ -9,9 +9,10 @@ const CitaSchema = mongoose.Schema({
         require: true,
         trim: true
     },
-    idServicio: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Servicio'
+    Servicio: {
+        type: String,
+        require: true,
+        trim: true
     },
     docEmpleado: {
         type: Number,
@@ -31,6 +32,11 @@ const CitaSchema = mongoose.Schema({
         require: true,
         trim: true
     },
+    Estado: {
+        type: String,
+        require: true,
+        trim: true
+    }
 });
 
 module.exports = mongoose.model('Cita', CitaSchema);

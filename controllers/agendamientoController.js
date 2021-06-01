@@ -27,31 +27,38 @@ exports.crearCita = async (req, res) => {
 
     try {
         cita = new Cita(req.body);
+        console.log(cita);
+
         let inicioEnviado = cita.horaInicio;
         let finalEnviado = cita.horaFin;
         let docEmplEnvi = cita.docEmpleado;
 
-        console.log(docEmplEnvi);
         let noDispo = await Cita.find({
             $or:
                 [
                     {
                         $and: [
-                            { horaFin: { $gte: new Date(inicioEnviado) } },
-                            { horaFin: { $lt: new Date(finalEnviado) } },
+                            { horaInicio: { $gte: new Date(inicioEnviado) } },
+                            { horaInicio: { $lt: new Date(finalEnviado) } }
                         ]
                     },
                     {
                         $and: [
-                            { horaInicio: { $gte: new Date(inicioEnviado) } },
-                            { horaInicio: { $lt: new Date(finalEnviado) } },
+                            { horaFin: { $gt: new Date(inicioEnviado) } },
+                            { horaFin: { $lt: new Date(finalEnviado) } }
                         ]
-                    }
+                    },
+                    {
+                        $and: [
+                            { horaInicio: { $lt: new Date(inicioEnviado) } },
+                            { horaFin: { $gt: new Date(finalEnviado) } }
+                        ]
+                    },
                 ]
         }
         );
-
         let result = noDispo.filter(cita => cita.docEmpleado === docEmplEnvi)
+
 
         if (result.length !== 0) {
             return res.status(400).json({ msg: 'LAS FECHAS SE CRUZAN EN LA AGENDA' });

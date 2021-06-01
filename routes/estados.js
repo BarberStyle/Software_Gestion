@@ -1,15 +1,12 @@
 //rutas crear usuarios
 const express = require('express');
 const router = express.Router();
-const tipoController = require('../controllers/tipoController');
+const estadoController = require('../controllers/estadoController');
 
-
-
-//obtiene tipos
+//consultar estados
 router.get('/',
-  tipoController.obtenerTipos
+  estadoController.obtenerEstados
 
 );
-
 
 module.exports = router;
