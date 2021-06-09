@@ -21,7 +21,7 @@ exports.obtenerAgendamientos = async (req, res) => {
 
         const result = citas.filter(cita => cita.docEmpleado === doc);
 
-        if (!result) {
+        if (result.length === 0) {
             return res.status(400).json({ msg: 'EL EMPLEADO NO TIENE CITAS PARA ESTE DÍA' });
         }
         //confirmacion

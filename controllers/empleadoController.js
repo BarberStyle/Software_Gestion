@@ -1,5 +1,7 @@
 const Empleado = require('../models/Empleado');
 const bcryptjs = require('bcryptjs');
+const Role = require('../models/Role');
+const Usuario = require('../models/Usuario');
 
 const { validationResult } = require('express-validator');
 
@@ -13,27 +15,30 @@ exports.crearEmpleado = async (req, res) => {
         return res.status(400).json({ errores: errores.array() });
     }
 
-    const { documento, contrasena } = req.body;
+    const { documento, contraseña } = req.body;
 
     try {
 
         //Revisar usuario regitrado unico
-        let empleado = await Empleado.findOne({ documento });
+        let usuario = await Usuario.findOne({ documento });
 
-        if (empleado) {
+        if (usuario) {
+            console.log(usuario);
             return res.status(400).json({ msg: 'EL EMPLEADO YA EXISTE' });
         }
 
         //crea el nuevo Empleado
-        empleado = new Empleado(req.body);
+        usuario = new Usuario(req.body);
 
         //hashear el password
         const salt = await bcryptjs.genSalt(10);
-        empleado.contrasena = await bcryptjs.hash(contrasena, salt);
+        usuario.contraseña = await bcryptjs.hash(contraseña, salt);
 
+        const role = await Role.findOne({ nombre: "Empleado" });
+        usuario.rol = [role._id];
 
         //guarda en bd
-        await empleado.save();
+        await usuario.save();
 
         res.json('EMPLEADO CREADO CON EXITO');
     } catch (error) {
@@ -47,7 +52,7 @@ exports.crearEmpleado = async (req, res) => {
 //consulta todos los empleados registados en la bd
 exports.obtenerEmpleados = async (req, res) => {
     try {
-        const empleados = await Empleado.find({});
+        const empleados = await Usuario.find({rol: '604e9ebe6e69f62dc4e181b6'});
         res.json({ empleados });
     } catch (error) {
         console.log(error);

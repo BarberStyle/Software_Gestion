@@ -35,9 +35,17 @@ const UsuariosSchema = mongoose.Schema({
         require: true,
         trim: true
     },
+    fecha: {
+        type: Date,
+        require: true,
+        trim: true
+    },
+    perfil: {
+        type: String,
+        trim: true
+    },
     contraseña: {
         type: String,
-        require: true,
         trim: true
     },
     rol: {

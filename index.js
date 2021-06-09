@@ -35,6 +35,7 @@ app.use('/api/agendar-cita' , require('./routes/agendamiento'));
 app.use('/api/consultar-agendamiento', require('./routes/consultasAgendamiento'))
 app.use('/api/estados', require('./routes/estados'))
 app.use('/api/citas', require('./routes/citas'))
+app.use('/api/tipos-servicios', require('./routes/tipoServicios'))
 
 
 const port = process.env.PORT || 7010

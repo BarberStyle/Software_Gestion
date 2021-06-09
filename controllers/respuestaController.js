@@ -16,7 +16,7 @@ exports.crearRespuesta = async (req, res) => {
 
         await respuesta.save();
 
-        res.json(respuesta);
+        res.json('PREGUNTA REGISTRADA CON EXITO');
     } catch (error) {
         console.log(error);
         res.status(400).send('HUBO UN ERROR');

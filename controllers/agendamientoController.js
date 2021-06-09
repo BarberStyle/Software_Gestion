@@ -1,5 +1,4 @@
 const Usuario = require('../models/Usuario');
-const { validationResult } = require('express-validator');
 const Cita = require('../models/Cita');
 
 exports.validarUsuario = async (req, res) => {
@@ -8,7 +7,7 @@ exports.validarUsuario = async (req, res) => {
     try {
 
         //revisar que el usuario si exista
-        let usuario = await Usuario.findOne({ documento });
+        let usuario = await Usuario.findOne({documento, rol: '604e9ea56e69f62dc4e181b5'});
         if (!usuario) {
             return res.status(400).json({ msg: 'EL USUARIO NO ESTA REGISTRADO' });
         }
@@ -57,8 +56,7 @@ exports.crearCita = async (req, res) => {
                 ]
         }
         );
-        let result = noDispo.filter(cita => cita.docEmpleado === docEmplEnvi)
-
+        let result = noDispo.filter(cita => cita.docEmpleado === docEmplEnvi);
 
         if (result.length !== 0) {
             return res.status(400).json({ msg: 'LAS FECHAS SE CRUZAN EN LA AGENDA' });

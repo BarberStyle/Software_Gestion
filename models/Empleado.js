@@ -41,14 +41,14 @@ const EmpleadoSchema = mongoose.Schema({
         require: true,
         trim: true
     },
-    contrasena: {
+    contraseña: {
         type: String,
         require: true,
         trim: true
     },
-    idPregunta: {
-        type: Number,
-        trim: true
+    rol: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role'
     },
     registro: {
         type: Date,

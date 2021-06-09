@@ -13,7 +13,7 @@ exports.crearUsuario = async (req, res) => {
         return res.status(400).json({ errores: errores.array() });
     }
 
-    const { documento, contraseña } = req.body;
+    const { documento } = req.body;
 
     try {
         //Revisar usuario regitrado unico
@@ -29,15 +29,9 @@ exports.crearUsuario = async (req, res) => {
 
         // checking for roles
         if (!req.body.rol) {
-
             const role = await Role.findOne({ nombre: "Cliente" });
             usuario.rol = [role._id];
         }
-
-
-        //hashear el password
-        const salt = await bcryptjs.genSalt(10);
-        usuario.contraseña = await bcryptjs.hash(contraseña, salt);
 
         //guarda el nuevo usuario bd 
         await usuario.save();
@@ -54,7 +48,7 @@ exports.crearUsuario = async (req, res) => {
 //consulta todos los empleados registados en la bd
 exports.obtenerClientes = async (req, res) => {
     try {
-        const usuarios = await Usuario.find({});
+        const usuarios = await Usuario.find({rol: '604e9ea56e69f62dc4e181b5'});
         res.json({ usuarios });
     } catch (error) {
         console.log(error);
