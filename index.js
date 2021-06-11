@@ -38,5 +38,5 @@ app.use('/api/citas', require('./routes/citas'))
 app.use('/api/tipos-servicios', require('./routes/tipoServicios'))
 
 
-const port = process.env.PORT || 7010
+const port = process.env.PORT || 7011
 app.listen(port, '0.0.0.0', () => console.log(`Server running on port: ${port}`))
