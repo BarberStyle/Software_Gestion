@@ -4,10 +4,11 @@ const Cita = require('../models/Cita');
 exports.obtenerAgendamientos = async (req, res) => {
     const { doc, fecha } = req.body;
     try {
-        console.log(doc, fecha);
         let cadenaTexto = fecha;
+
         let fragmentoTexto = cadenaTexto.split('T');
         let formatFecha = fragmentoTexto[0];
+
         console.log(formatFecha);
         let citas = await Cita.find({
             $expr: {

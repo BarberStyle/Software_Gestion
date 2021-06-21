@@ -13,11 +13,10 @@ conectarDB();
 
 app.use(cors());
 
-//leer los datos que envia el usuario
 //habilitar express.json
 app.use(express.json({ extended: true }));
 
-//puerto de la app
+
 
 //importar rutas
 //Ruting
@@ -36,7 +35,9 @@ app.use('/api/consultar-agendamiento', require('./routes/consultasAgendamiento')
 app.use('/api/estados', require('./routes/estados'))
 app.use('/api/citas', require('./routes/citas'))
 app.use('/api/tipos-servicios', require('./routes/tipoServicios'))
+app.use('/api/reportes', require('./routes/reportes'))
 
 
-const port = process.env.PORT || 7011
+//puerto de la app
+const port = process.env.PORT || 7009
 app.listen(port, '0.0.0.0', () => console.log(`Server running on port: ${port}`))
