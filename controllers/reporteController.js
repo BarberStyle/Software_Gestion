@@ -1,8 +1,8 @@
 const Cita = require('../models/Cita');
 
-exports.generarConsulta= async (req, res) => {
+exports.generarConsulta = async (req, res) => {
     const { fechaInicio, fechaFinal } = req.body;
-    
+
     try {
         let citas = await Cita.find({
             $expr: {
@@ -17,7 +17,7 @@ exports.generarConsulta= async (req, res) => {
             }
         }).sort({ costo: -1 });
 
-        let cumplidas = citas.filter(cita=> cita.Estado == 'Cumplida');
+        let cumplidas = citas.filter(cita => cita.Estado == 'Cumplida');
 
         if (cumplidas.length === 0) {
             return res.status(400).json({ msg: 'NO SE ENCONTRARON DATOS' });
@@ -31,13 +31,3 @@ exports.generarConsulta= async (req, res) => {
 
 }
 
-/* exports.obtenerProductos = async (req, res) => {
-    try {
-        const productos = await Producto.find({});
-        res.json({ productos });
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Hubo un error');
-    }
-
-} */
