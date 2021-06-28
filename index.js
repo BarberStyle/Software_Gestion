@@ -37,6 +37,7 @@ app.use('/api/citas', require('./routes/citas'))
 app.use('/api/tipos-servicios', require('./routes/tipoServicios'))
 app.use('/api/reportes', require('./routes/reportes')) 
 app.use('/api/reporte-edades', require('./routes/reporteEdad')) 
+app.use('/api/puntos', require('./routes/puntos')) 
 
 
 //puerto de la app

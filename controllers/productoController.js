@@ -2,17 +2,14 @@ const Producto= require('../models/Producto');
 const { validationResult } = require('express-validator');
 
 exports.crearProducto= async (req, res) => {
-
     //revisar si hay errores
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
         return res.status(400).json({ errores: errores.array() });
     }
-
     const { nombre } = req.body;
 
     try {
-
         //Revisar usuario regitrado unico
         let producto= await Producto.findOne({ nombre });
 
@@ -30,8 +27,6 @@ exports.crearProducto= async (req, res) => {
         console.log(error);
         res.status(400).send('Hubo un error');
     }
-
-
 }
 
 exports.obtenerProductos = async (req, res) => {
